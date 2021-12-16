@@ -21,17 +21,35 @@ nav {
     background-color: cadetblue;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 5px;
 }
 
 /********** Note Card **********/
 .note-card {
     display: flex;
     background-color: chocolate;
+
+    /* for expend */
+    /* height: 100px; */
 }
+
+.note-card p{
+    /* pointer-events: none; */
+
+}
+
 
 .description {
     /* display: none; */
     order: 1;
+}
+
+.expand {
+    display: flex;
+    height: 100px;
+}
+
+.expand p {
+    font-weight: bold;
 }
 /******************************/
