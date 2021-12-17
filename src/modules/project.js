@@ -16,15 +16,15 @@ let myNotes = [{
     priority: '3',
 }]
 
-class Note{
-    constructor(title, description, date, status,priority) {
-        this.title = title
-        this.description = description
-        this.date = date
-        this.status = status
-        this.priority = priority
-    }
-}
+// class Note{
+//     constructor(title, description, date, status,priority) {
+//         this.title = title
+//         this.description = description
+//         this.date = date
+//         this.status = status
+//         this.priority = priority
+//     }
+// }
 
 //creating sub class
 // class Coding extends Note {
@@ -79,11 +79,14 @@ function createDisplayCard(title, description, date, status, priority, i) {
 }
 
 function updateDisplay() {
-    addNotesToArray()
+    // addNotesToArray()
     displayNotes()
+
 }
 
 export default updateDisplay;
+
+//  CORRECT THE CLASS
 
 //show the description when clicked by expending that note
 //change priority to a color based on the number
