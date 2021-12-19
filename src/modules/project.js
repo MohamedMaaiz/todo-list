@@ -2,50 +2,44 @@ import {showNoteCardDetails} from './events.js'
 
 const mainDisplay = document.getElementById('main-display')
 
-let myNotes = [{
-    title: 'Note H',
-    description: 'this is hidden',
-    date: '1 / 2 / 34',
-    status: 'Y',
-    priority: '1',
-},{
-    title: 'Another Note',
-    description: 'this is hidden too',
-    date: '5 / 6 / 78',
-    status: 'N',
-    priority: '3',
-}]
+class Note{
+    constructor(title, description, date, status,priority) {
+        // Note.projects = []
+        this.title = title
+        this.description = description
+        this.date = date
+        this.status = status
+        this.priority = priority
+        Note.all.push(this)
+    }
 
-// class Note{
-//     constructor(title, description, date, status,priority) {
-//         this.title = title
-//         this.description = description
-//         this.date = date
-//         this.status = status
-//         this.priority = priority
-//     }
-// }
+    getInfo() {
+        return [this.title, this.description, this.date, this.status, this.priority]
+    }
 
+    setProjects(projects) {
+        this.projects = projects
+    }
+
+    getProjects() {
+        return this.projects
+    }
+
+    //to remove from all list //note1.destroy();
+    destroy(){
+        let i = Note.all.indexOf(this);
+        Note.all.splice(i, 1);
+    }
+
+    static all = []
+}
+  
 //creating sub class
 // class Coding extends Note {
 //     constructor(title, description, date, status,priority) {
 //         super(title, description, date, status,priority)
 //     }
 // }
-
-
-
-
-function addNotesToArray(title, description, date, status, priority) {
-    myNotes.push(new Note(title, description, date, status, priority))
-}
-
-function displayNotes() {
-    mainDisplay.textContent = 'notes'
-    myNotes.forEach((object, i) => {
-        createDisplayCard (object.title, object.description, object.date, object.status, object.priority, i)
-    })
-}
 
 function createDisplayCard(title, description, date, status, priority, i) {
     const card = document.createElement('div')
@@ -68,7 +62,7 @@ function createDisplayCard(title, description, date, status, priority, i) {
     statusP.textContent = status
     priorityD.textContent = priority
 
-    card.onclick = () => showNoteCardDetails(i)
+    card.onclick = () => showNoteCardDetails(i) //event 7
 
     card.appendChild(priorityD)
     card.appendChild(titleP)
@@ -78,15 +72,11 @@ function createDisplayCard(title, description, date, status, priority, i) {
     mainDisplay.appendChild(card)
 }
 
-function updateDisplay() {
-    // addNotesToArray()
-    displayNotes()
 
-}
 
-export default updateDisplay;
+export {Note, createDisplayCard};
 
 //  CORRECT THE CLASS
 
-//show the description when clicked by expending that note
 //change priority to a color based on the number
+//make a seperate module for the Note Class

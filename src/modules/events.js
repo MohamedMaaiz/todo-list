@@ -4,7 +4,7 @@ function clearMainDisplay() {
     selectors.mainDisplay.textContent = ''
 }
 
-function showNoteCardDetails(i) {
+function showNoteCardDetails(i) { //project 91
     const targetNote = document.querySelector(`[data-index="${i}"]`)
 
     if (targetNote.classList.contains ('expand')) {
@@ -16,8 +16,15 @@ function showNoteCardDetails(i) {
     }
 }
 
-function addEvents() {
+function userNoteInput() {
+    let title = 'name'
+    let details = 'generated'
+    let date = '0/0/0'
+    let status = 'Y'
+    let priority = 2
 
+    return [title, details, date, status, priority]
 }
 
-export {addEvents, clearMainDisplay, showNoteCardDetails};
+
+export {clearMainDisplay, showNoteCardDetails, userNoteInput};
