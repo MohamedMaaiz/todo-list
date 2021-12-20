@@ -1,4 +1,4 @@
-
+import {Note} from './project.js'
 
 function clearMainDisplay() {
     selectors.mainDisplay.textContent = ''
@@ -16,7 +16,15 @@ function showNoteCardDetails(i) { //project 91
     }
 }
 
-function userNoteInput() {
+function deleteNoteCard(i) { //project 69
+    const targetNote = document.querySelector(`[data-index="${i}"]`)
+
+    Note.all.splice(i, 1);
+
+    console.log(Note.all)
+}
+
+function userNoteInput() { //take input from user
     let title = 'name'
     let details = 'generated'
     let date = '0/0/0'
@@ -27,4 +35,4 @@ function userNoteInput() {
 }
 
 
-export {clearMainDisplay, showNoteCardDetails, userNoteInput};
+export {clearMainDisplay, showNoteCardDetails, userNoteInput, deleteNoteCard};

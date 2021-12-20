@@ -18,7 +18,6 @@ let testNote3 = ['Note 3', 'this is hidden too', '5 / 6 / 78', 'N', '3']
 
 
 function displayNotes() { //use this only to display as new display
-    mainDisplay.textContent = 'notes'
     
     //display from existing notes
     createDisplayCard(...testNote1.getInfo(),index++)
@@ -31,6 +30,8 @@ function displayNotes() { //use this only to display as new display
     // console.log(JSON.stringify(Note.all));
 }
 
+//just desplay using the arry list and use this method to display when new note is added
+
 function noteGenerator(title, details, date, status, priority, i) {
 
     window['n'+i] = new Note(title, details, date, status, priority)
@@ -39,8 +40,8 @@ function noteGenerator(title, details, date, status, priority, i) {
 }
 
 function loadDisplay() {
-    displayNotes()
     addNewNoteButton()
+    displayNotes()
     
     //test
     const test = document.querySelector('.heading')

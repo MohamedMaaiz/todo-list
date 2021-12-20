@@ -1,4 +1,4 @@
-import {showNoteCardDetails} from './events.js'
+import {showNoteCardDetails, deleteNoteCard} from './events.js'
 
 const mainDisplay = document.getElementById('main-display')
 
@@ -26,8 +26,8 @@ class Note{
     }
 
     //to remove from all list //note1.destroy();
-    destroy(){
-        let i = Note.all.indexOf(this);
+    destroy(i){
+        // let i = Note.all.indexOf(this);
         Note.all.splice(i, 1);
     }
 
@@ -54,6 +54,9 @@ function createDisplayCard(title, description, date, status, priority, i) {
     const dateP = document.createElement('p')
     const statusP = document.createElement('p')
 
+    const dltBTN = document.createElement('button')
+    dltBTN.textContent = 'X'
+
     descriptionP.classList.add('description')
 
     titleP.textContent = title
@@ -63,12 +66,14 @@ function createDisplayCard(title, description, date, status, priority, i) {
     priorityD.textContent = priority
 
     card.onclick = () => showNoteCardDetails(i) //event 7
+    dltBTN.onclick = () => deleteNoteCard(i) //event 19
 
     card.appendChild(priorityD)
     card.appendChild(titleP)
     card.appendChild(descriptionP)
     card.appendChild(dateP)
     card.appendChild(statusP)
+    card.appendChild(dltBTN)
     mainDisplay.appendChild(card)
 }
 
@@ -76,7 +81,6 @@ function createDisplayCard(title, description, date, status, priority, i) {
 
 export {Note, createDisplayCard};
 
-//  CORRECT THE CLASS
-
+// add delete button
 //change priority to a color based on the number
 //make a seperate module for the Note Class
