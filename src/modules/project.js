@@ -34,12 +34,26 @@ class Note{
     static all = []
 }
   
-//creating sub class
-// class Coding extends Note {
-//     constructor(title, description, date, status,priority) {
-//         super(title, description, date, status,priority)
-//     }
-// }
+// creating sub class
+class Coding extends Note {
+    constructor(title, description, date, status,priority) {
+        super(title, description, date, status,priority)
+        Coding.coding.push(this)
+    }
+
+    static coding = []
+}
+
+function generateSubClass(subName, value) {
+
+    var obj = {}
+    obj[subName] = value
+    console.log(obj)
+
+    // class subName extends Note {
+        
+    // }
+}
 
 function createDisplayCard(title, description, date, status, priority, i) {
     const card = document.createElement('div')
@@ -77,10 +91,7 @@ function createDisplayCard(title, description, date, status, priority, i) {
     mainDisplay.appendChild(card)
 }
 
+export {Note, createDisplayCard, Coding ,generateSubClass};
 
-
-export {Note, createDisplayCard};
-
-// add delete button
 //change priority to a color based on the number
 //make a seperate module for the Note Class
