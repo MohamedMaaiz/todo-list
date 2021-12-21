@@ -1,4 +1,5 @@
 import {Note} from './project.js'
+import loadDisplay from './note-display.js'
 
 function clearMainDisplay() {
     selectors.mainDisplay.textContent = ''
@@ -21,7 +22,7 @@ function deleteNoteCard(i) { //project 69
 
     Note.all.splice(i, 1);
 
-    console.log(Note.all)
+    loadDisplay()
 }
 
 function userNoteInput() { //take input from user
