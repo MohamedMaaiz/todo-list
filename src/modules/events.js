@@ -31,8 +31,11 @@ function userNoteInput() { //take input from user
 }
 
 function testingSubClass() {
+    
+    let string = 'test'
+    let testObj = {}
 
-    let testObj = {date: "1 / 2 / 34",
+    testObj[string] = {date: "1 / 2 / 34",
     description: "this is hidden",
     priority: "1",
     status: "Y",
@@ -45,11 +48,20 @@ function testingSubClass() {
     // let testCoding1 = new Coding('Coding', 'this is hidden', '1 / 2 / 34', 'Y', '1')
     // loadDisplay()
 
-    Object.setPrototypeOf(testObj, Note)
+    // Object.setPrototypeOf(testObj, Note.all)
+    // Object.setPrototypeOf(Note, testObj)
     //try adding the testObj into Note as a subclass
+
+    // Note.all[2] = testObj
 
     console.log(Note.all)
     console.log(testObj)
 }
 
 export { showNoteCardDetails, userNoteInput, deleteNoteCard, testingSubClass};
+
+
+// make one main class that notes cant be added
+// only more objects using that class
+// add notes to an object in that class
+// show home display using all objects in that class

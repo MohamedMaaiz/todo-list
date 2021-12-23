@@ -8,5 +8,5 @@ loadUI();
 function loadUI() {
     loadDisplay()
 
-    // testingSubClass()
+    testingSubClass()
 }
