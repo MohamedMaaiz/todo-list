@@ -23,6 +23,12 @@ nav {
     flex-direction: column;
     gap: 5px;
 }
+/********** Project Label **********/
+.active-project {
+    background-color: aquamarine;
+}
+
+/******************************/
 
 /********** Note Card **********/
 .note-card {
@@ -53,6 +59,7 @@ nav {
     font-weight: bold;
 }
 /******************************/
+
 #add-note {
     order: 1;
 }

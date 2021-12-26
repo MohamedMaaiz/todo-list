@@ -1,10 +1,10 @@
-import {Note, Project } from './Notes.js'
-import {loadNoteDisplay} from './note-display.js'
+import Note from './Notes.js'
+import {changeDisplay, loadNoteDisplay} from './note-display.js'
 import TodoList from './todo-list'
 import loadProjectDisplay from './project-display'
 
-function showNoteCardDetails(i) { //project 91
-    const targetNote = document.querySelector(`[data-index="${i}"]`)
+function showNoteCardDetails(i) { //note-display
+    const targetNote = document.querySelector(`[data-index-note="${i}"]`)
 
     if (targetNote.classList.contains ('expand')) {
         targetNote.classList.remove('expand')
@@ -15,11 +15,23 @@ function showNoteCardDetails(i) { //project 91
     }
 }
 
-function deleteNoteCard(i) { //project 69
-    const targetNote = document.querySelector(`[data-index="${i}"]`)
+function deleteNoteCard(i) { // note-display
+    const targetNote = document.querySelector(`[data-index-note="${i}"]`)
+    const targetProject = document.querySelector('.active-project')
 
-    Note.all.splice(i, 1);
-    loadNoteDisplay()
+    let projectID = targetProject.getAttribute('data-index-project')
+    
+    TodoList.projects[projectID].notes.splice(i, 1)
+
+    changeDisplay(projectID)
+}
+
+function deleteProject(i) {
+    //make a confirmation screen as it will delete the notes too
+
+    TodoList.projects.splice(i, 1)
+    
+    loadProjectDisplay()
 }
 
 function userNoteInput() { //take input from user
@@ -37,17 +49,10 @@ function loadEventListners() {
 
     addProjectBTN.onclick = () => {
         new TodoList('p1class')
-        console.log('added')
         loadProjectDisplay()
     }
-
-   
 }
 
-export { showNoteCardDetails, userNoteInput, deleteNoteCard, loadEventListners};
+export { showNoteCardDetails, userNoteInput, deleteNoteCard, loadEventListners, deleteProject};
 
-// make a main Note class, no notes should be there
-// add an array to save all the projects
-// add notes to one of the object in project
-// display from the selected project object
 // make home button display from all the objects in project
