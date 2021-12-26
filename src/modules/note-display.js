@@ -1,4 +1,4 @@
-import { userNoteInput, deleteNoteCard, showNoteCardDetails } from './events'
+import { userNoteInput, deleteNoteCard, showNoteCardDetails, labelActive } from './events'
 import Note from './Notes'
 import TodoList from './todo-list'
 
@@ -10,20 +10,11 @@ function addNewNoteButton() {
     addNoteBTN.onclick = () => noteGenerator(...userNoteInput())
 }
 
-// function displayNotes() { 
-//     mainDisplay.innerHTML = ''
-//     mainDisplay.appendChild(addNoteBTN)
-    
-//     for (let i = 0; i < Note.all.length; i++) {
-//         createDisplayCard(...Object.values(Note.all[i]),i)
-//     }
-//     // console.log(JSON.stringify(Note.all));
-// }
-
-function createDisplayCard(title, description, date, status, priority, i) {
+function createDisplayCard(title, description, date, status, priority, i, location) {
     const card = document.createElement('div')
     card.classList.add('note-card')
     card.setAttribute('data-index-note',i)
+    card.setAttribute('data-location', location)
 
     const priorityD = document.createElement('div')
     priorityD.classList.add('priority')
@@ -44,9 +35,9 @@ function createDisplayCard(title, description, date, status, priority, i) {
     statusP.textContent = status
     priorityD.textContent = priority
 
-    card.onclick = () => showNoteCardDetails(i) //event
+    card.onclick = () => showNoteCardDetails(i, location) //event
     dltBTN.onclick = (event) => {
-        deleteNoteCard(i) //event
+        deleteNoteCard(i, location) //event
         event.stopPropagation()
     }
 
@@ -73,23 +64,32 @@ function noteGenerator(title, details, date, status, priority, location) {
     TodoList.projects[location].notes.push(thisNote)
 
     let i = TodoList.projects[location].notes.length - 1
-    createDisplayCard(...Object.values(thisNote) ,i)
+    createDisplayCard(...Object.values(thisNote), i, location)
 }
 
-function changeDisplay(i) {
-    mainDisplay.innerHTML = ''
-    mainDisplay.innerHTML = TodoList.projects[i].projectName
+function changeDisplay(id) {
+    mainDisplay.innerHTML = TodoList.projects[id].projectName
     mainDisplay.appendChild(addNoteBTN)
-    addNoteBTN.onclick = () => noteGenerator(...userNoteInput(),i)
+    addNoteBTN.onclick = () => noteGenerator(...userNoteInput(),id)
 
     //load previously generated notes
-    TodoList.projects[i].notes.forEach((obj, i) => {
-        createDisplayCard(...Object.values(obj) ,i)
+    TodoList.projects[id].notes.forEach((obj, i) => {
+        createDisplayCard(...Object.values(obj), i, id)
     });
+}
+
+function displayAllNotes() {
+    mainDisplay.innerHTML = 'Home'
+    
+    TodoList.projects.forEach((project, location) => {
+        project.notes.forEach((note, i) => {
+            createDisplayCard(...Object.values(note), i, location)
+        })
+    })
 }
 
 function loadNoteDisplay() {
     addNewNoteButton()
 }
 
-export {loadNoteDisplay, changeDisplay};
+export {loadNoteDisplay, changeDisplay, displayAllNotes};

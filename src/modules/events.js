@@ -1,10 +1,27 @@
 import Note from './Notes.js'
-import {changeDisplay, loadNoteDisplay} from './note-display.js'
+import {changeDisplay, displayAllNotes} from './note-display.js'
 import TodoList from './todo-list'
 import loadProjectDisplay from './project-display'
 
-function showNoteCardDetails(i) { //note-display
-    const targetNote = document.querySelector(`[data-index-note="${i}"]`)
+let currentScreen
+const labelActive = {
+    remove: function() {
+        let currentActive = document.querySelector('.active-display')
+        if (currentActive) currentActive.classList.remove('active-display')
+    },
+    add: function(label, i) {
+        currentScreen = 'project'
+        label.classList.add('active-display') 
+        changeDisplay(i)
+    },
+    addBTN: function(btn) {
+        currentScreen = 'home'
+        btn.classList.add('active-display') 
+    }
+}
+
+function showNoteCardDetails(i, location) { //note-display
+    const targetNote = document.querySelector(`[data-index-note="${i}"][data-location="${location}"]`)
 
     if (targetNote.classList.contains ('expand')) {
         targetNote.classList.remove('expand')
@@ -15,15 +32,11 @@ function showNoteCardDetails(i) { //note-display
     }
 }
 
-function deleteNoteCard(i) { // note-display
-    const targetNote = document.querySelector(`[data-index-note="${i}"]`)
-    const targetProject = document.querySelector('.active-project')
+function deleteNoteCard(i, location) { // note-display
+    TodoList.projects[location].notes.splice(i, 1)
 
-    let projectID = targetProject.getAttribute('data-index-project')
-    
-    TodoList.projects[projectID].notes.splice(i, 1)
-
-    changeDisplay(projectID)
+    if (currentScreen == 'home') return displayAllNotes()
+    changeDisplay(location)
 }
 
 function deleteProject(i) {
@@ -51,8 +64,15 @@ function loadEventListners() {
         new TodoList('p1class')
         loadProjectDisplay()
     }
+
+    const homeBTN = document.getElementById('home-btn')
+    homeBTN.onclick = () => {
+        labelActive.remove()
+        labelActive.addBTN(homeBTN)
+        displayAllNotes()
+    }
 }
 
-export { showNoteCardDetails, userNoteInput, deleteNoteCard, loadEventListners, deleteProject};
+export { showNoteCardDetails, userNoteInput, deleteNoteCard, loadEventListners, deleteProject, labelActive};
 
 // make home button display from all the objects in project

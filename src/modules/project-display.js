@@ -1,6 +1,6 @@
 import TodoList from './todo-list'
 import {changeDisplay} from './note-display'
-import { deleteProject } from './events'
+import { deleteProject, labelActive } from './events'
 
 
 const mainDisplay = document.getElementById('main-display')
@@ -45,17 +45,6 @@ function createProjectLabel(projectName, i) {
     label.appendChild(projectNameP)
     label.appendChild(dltBTN)
     userProjects.appendChild(label)
-}
-
-const labelActive = {
-    remove: function() {
-        let currentActive = document.querySelector('.active-project')
-        if (currentActive) currentActive.classList.remove('active-project')
-    },
-    add: function(label, i) {
-        label.classList.add('active-project') 
-        changeDisplay(i)
-    }
 }
 
 function loadProjectDisplay() {
