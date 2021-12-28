@@ -13,21 +13,21 @@ function loadPreData() {
         'title': 'Note H', 
         'details': 'this is hidden', 
         'date': '1 / 2 / 34', 
-        'status': 'Y', 
+        'status': true, 
         'priority': '1'
     }
     let testNote2 = {
         'title': 'Another Note', 
         'details': 'this is hidden too', 
         'date': '5 / 6 / 78', 
-        'status': 'N', 
+        'status': false, 
         'priority': '3'
     }
     let testNote3 = {
         'title': 'Note 3', 
         'details': 'this is hidden too', 
         'date': '5 / 6 / 78', 
-        'status': 'N', 
+        'status': false, 
         'priority': '3'
     }
 
@@ -45,7 +45,8 @@ function loadUI() {
     loadProjectDisplay()
 }
 
-// add checkbox to notes
-// add a color to priority number
+// add location info in home screen
+// add user input screen for projects
+// add user imput screen for notes
 
 // add the date-nfs

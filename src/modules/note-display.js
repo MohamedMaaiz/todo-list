@@ -1,4 +1,4 @@
-import { userNoteInput, deleteNoteCard, showNoteCardDetails } from './events'
+import { userNoteInput, priorityColor, displayCardEvents} from './events'
 import Note from './Notes'
 import TodoList from './todo-list'
 
@@ -22,30 +22,28 @@ function createDisplayCard(title, description, date, status, priority, i, locati
     const titleP = document.createElement('p')
     const descriptionP = document.createElement('p')
     const dateP = document.createElement('p')
-    const statusP = document.createElement('p')
+    const statusI = document.createElement('input')
+    statusI.setAttribute('type', 'checkbox')
 
     const dltBTN = document.createElement('button')
     dltBTN.textContent = 'X'
 
     descriptionP.classList.add('description')
-
+    
     titleP.textContent = title
     descriptionP.textContent = description
     dateP.textContent = date
-    statusP.textContent = status
     priorityD.textContent = priority
-
-    card.onclick = () => showNoteCardDetails(i, location) //event
-    dltBTN.onclick = (event) => {
-        deleteNoteCard(i, location) //event
-        event.stopPropagation()
-    }
+    status ? statusI.checked = true : statusI.checked = false
+    
+    displayCardEvents(i, location, status, card, dltBTN, statusI, priorityD, priority)
+    priorityColor(status, priorityD, priority)
 
     card.appendChild(priorityD)
     card.appendChild(titleP)
     card.appendChild(descriptionP)
     card.appendChild(dateP)
-    card.appendChild(statusP)
+    card.appendChild(statusI)
     card.appendChild(dltBTN)
     mainDisplay.appendChild(card)
 }

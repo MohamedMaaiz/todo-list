@@ -35,8 +35,7 @@ function showNoteCardDetails(i, location) { //note-display
 function deleteNoteCard(i, location) { // note-display
     TodoList.projects[location].notes.splice(i, 1)
 
-    if (currentScreen == 'home') return displayAllNotes()
-    changeDisplay(location)
+    currentScreen == 'home' ? displayAllNotes() : changeDisplay(location)
 }
 
 function deleteProject(i) {
@@ -51,10 +50,47 @@ function userNoteInput() { //take input from user
     let title = 'name'
     let details = 'generated'
     let date = '0/0/0'
-    let status = 'Y'
+    let status = false
     let priority = 2
 
     return [title, details, date, status, priority]
+}
+
+function changeNoteStatus(i, location, status) {
+    
+    if (status) {
+        TodoList.projects[location].notes[i].status = false
+        currentScreen == 'home' ? displayAllNotes() : changeDisplay(location)
+        return status = false
+    }
+    
+    TodoList.projects[location].notes[i].status = true
+    currentScreen == 'home' ? displayAllNotes() : changeDisplay(location)
+    return status = true 
+}
+
+function displayCardEvents(i, location, status, card, dltBTN, statusI, priorityD, priority) {
+    card.onclick = () => showNoteCardDetails(i, location)
+    dltBTN.onclick = (event) => {
+        event.stopPropagation()
+        deleteNoteCard(i, location)
+    }
+    statusI.onclick = (event) => {
+        event.stopPropagation()
+        priorityColor(changeNoteStatus(i, location, status, priorityD, priority),priorityD, priority)
+    }
+}
+
+function priorityColor(status, priorityD, priority) {
+    let color = 'gray'
+
+    status ? color
+    : priority == 3 ? color = 'red'
+    : priority == 2 ? color = 'orange'
+    : color = 'yellow'
+
+    priorityD.style.backgroundColor = color
+    // will add the note card 
 }
 
 function loadEventListners() {
@@ -73,4 +109,4 @@ function loadEventListners() {
     }
 }
 
-export { showNoteCardDetails, userNoteInput, deleteNoteCard, loadEventListners, deleteProject, labelActive};
+export { userNoteInput, loadEventListners, deleteProject, labelActive, priorityColor, displayCardEvents};
