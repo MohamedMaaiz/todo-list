@@ -1,5 +1,4 @@
 import {loadNoteDisplay} from './modules/note-display.js'
-import events from './modules/events.js'
 import {loadEventListners} from './modules/events.js'
 import loadProjectDisplay from './modules/project-display'
 
@@ -45,3 +44,8 @@ function loadUI() {
     loadPreData() //testing function
     loadProjectDisplay()
 }
+
+// add checkbox to notes
+// add a color to priority number
+
+// add the date-nfs

@@ -1,4 +1,4 @@
-import { userNoteInput, deleteNoteCard, showNoteCardDetails, labelActive } from './events'
+import { userNoteInput, deleteNoteCard, showNoteCardDetails } from './events'
 import Note from './Notes'
 import TodoList from './todo-list'
 

@@ -74,5 +74,3 @@ function loadEventListners() {
 }
 
 export { showNoteCardDetails, userNoteInput, deleteNoteCard, loadEventListners, deleteProject, labelActive};
-
-// make home button display from all the objects in project
