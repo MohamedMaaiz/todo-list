@@ -1,4 +1,3 @@
-import {loadNoteDisplay} from './modules/note-display.js'
 import {loadEventListners} from './modules/events.js'
 import loadProjectDisplay from './modules/project-display'
 
@@ -39,12 +38,9 @@ function loadPreData() {
 loadUI();
 
 function loadUI() {
-    loadNoteDisplay()
     loadEventListners()
     loadPreData() //testing function
     loadProjectDisplay()
 }
-
-// add user imput screen for notes
 
 // add the date-nfs

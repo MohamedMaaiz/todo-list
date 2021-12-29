@@ -11,6 +11,7 @@
         <h1 class="heading">Todo-list</h1>
     </header>
     <main>
+
         <nav>
             <div class="default-title">
                 <button id="home-btn" type="button">Home</button>
@@ -25,16 +26,27 @@
                         <button id="project-submit">Submit</button>
                     </div>
                 </div>
-                <div id="user-projects">
-                    <!-- projects added here -->
-                </div>
+                <div id="user-projects"> <!-- projects added here --> </div>
             </div>
         </nav>
+
         <div id="main-display">
-            <div class="home-project-names">
-            </div>
-            <div id="todo-notes">
+            <div class="home-project-names"></div>
+            <div class="project-name"></div>
+            <div id="todo-notes"> <!-- notes added here --> </div>
+            <div class="btn-input-div">
                 <button id="add-note" type="button"><span>+</span></button>
+                <div id="input-note">
+                    <input id="note-title" type="text" placeholder="Title">
+                    <input id="note-details" type="text" placeholder="Details">
+                    <input type="date" name="date" id="note-date">
+                    <select name="status" id="note-priority">
+                        <option value="1">low</option>
+                        <option value="2">medium</option>
+                        <option value="3">high</option>
+                    </select>
+                </div>
+                <button id="note-submit">Submit</button>
             </div>
         </div>
 

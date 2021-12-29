@@ -46,15 +46,7 @@ function deleteProject(i) {
     loadProjectDisplay()
 }
 
-function userNoteInput() { //take input from user
-    let title = 'name'
-    let details = 'generated'
-    let date = '0/0/0'
-    let status = false
-    let priority = 2
 
-    return [title, details, date, status, priority]
-}
 
 function changeNoteStatus(i, location, status) {
     if (status) {
@@ -92,10 +84,6 @@ function priorityColor(status, priorityD, priority) {
 }
 
 function loadEventListners() {
-    // const addProjectBTN = document.getElementById('add-project')
-
-    
-
     const homeBTN = document.getElementById('home-btn')
     homeBTN.onclick = () => {
         labelActive.remove()
@@ -104,4 +92,4 @@ function loadEventListners() {
     }
 }
 
-export { userNoteInput, loadEventListners, deleteProject, labelActive, priorityColor, displayCardEvents};
+export { loadEventListners, deleteProject, labelActive, priorityColor, displayCardEvents};

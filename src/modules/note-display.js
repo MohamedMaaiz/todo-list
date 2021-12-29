@@ -1,16 +1,14 @@
-import { userNoteInput, priorityColor, displayCardEvents} from './events'
+import { priorityColor, displayCardEvents} from './events'
 import Note from './Notes'
 import TodoList from './todo-list'
 
 
-const mainDisplay = document.getElementById('main-display')
+const projectName = document.querySelector('.project-name')
 const notesDsiplay = document.querySelector('#todo-notes')
 const homeProjName = document.querySelector('.home-project-names')
 const addNoteBTN = document.getElementById('add-note')
-
-function addNewNoteButton() {
-    addNoteBTN.onclick = () => noteGenerator(...userNoteInput())
-}
+const noteAddScreen = document.getElementById('input-note')
+const noteSubmitBTN = document.getElementById('note-submit')
 
 function createDisplayCard(title, description, date, status, priority, i, location) {
     const card = document.createElement('div')
@@ -69,14 +67,66 @@ function noteGenerator(title, details, date, status, priority, location) {
 
 function changeDisplay(id) {
     homeProjName.style.display = 'none'
-    notesDsiplay.innerHTML = TodoList.projects[id].projectName
-    notesDsiplay.appendChild(addNoteBTN)
-    addNoteBTN.onclick = () => noteGenerator(...userNoteInput(),id)
+    projectName.textContent = TodoList.projects[id].projectName
+    notesDsiplay.textContent = ''
+    addNewNoteButton(id)
 
     //load previously generated notes
     TodoList.projects[id].notes.forEach((obj, i) => {
         createDisplayCard(...Object.values(obj), i, id)
     });
+}
+
+function addNewNoteButton(id) {
+    addNoteBTN.onclick = () => {
+        if (addNoteBTN.textContent == '+') {
+            addNoteBTN.textContent = 'x'
+            noteSubmitBTN.style.display = 'flex'
+            noteAddScreen.style.display = 'flex'
+            document.getElementById('note-date').value = new Date().toDateInputValue();
+        } else {
+            clearInputBox()
+        }
+        // noteGenerator(...userNoteInput(),id)
+    }
+
+    noteSubmitBTN.onclick = () => {
+        noteGenerator(...userNoteInput(),id)
+        clearInputBox()
+    }
+}
+
+function clearInputBox() {
+    addNoteBTN.textContent = '+'
+    noteSubmitBTN.style.display = 'none'
+    noteAddScreen.style.display = 'none'
+
+    document.getElementById('note-title').value = ''
+    document.getElementById('note-details').value = ''
+    document.getElementById('note-priority').value = 1
+}
+
+Date.prototype.toDateInputValue = (function() {
+    var local = new Date(this);
+    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+    return local.toJSON().slice(0,10);
+});
+
+function userNoteInput() { //take input from user
+    let noteTitle = document.getElementById('note-title').value
+    let noteDetails = document.getElementById('note-details').value
+    let noteDate = document.getElementById('note-date').value
+    let notePriority = document.getElementById('note-priority').value
+
+    // console.log(noteTitle, noteDetails, noteDate, notePriority)
+    // let title = 'name'
+    // let details = 'generated'
+    // let date = '0/0/0'
+    // let status = false
+    // let priority = 2
+
+    // return [title, details, date, status, priority]
+    return [noteTitle, noteDetails, noteDate, false, notePriority]
 }
 
 function displayAllNotes() {
@@ -101,8 +151,4 @@ function projectNameInHome(location) {
     homeProjName.appendChild(nameCard)
 }
 
-function loadNoteDisplay() {
-    addNewNoteButton()
-}
-
-export {loadNoteDisplay, changeDisplay, displayAllNotes};
+export {changeDisplay, displayAllNotes};

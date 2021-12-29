@@ -20,7 +20,7 @@ nav {
 #main-display {
     background-color: cadetblue;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 5px;
 }
 /********** Project Label **********/
@@ -30,7 +30,6 @@ nav {
 
 #input-project {
     display: none;
-
 }
 
 #input-project input {
@@ -40,6 +39,10 @@ nav {
 .home-project-names {
     display: none;
     flex-direction: column;
+}
+
+.project-name {
+
 }
 
 #todo-notes {
@@ -77,5 +80,18 @@ nav {
 /******************************/
 
 #add-note {
-    order: 1;
+    width: 100%;
+}
+
+.btn-input-div {
+    display: flex;
+}
+
+#input-note {
+    display: none;
+    flex-direction: column;
+}
+
+#note-submit {
+    display: none;
 }
