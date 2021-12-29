@@ -20,7 +20,7 @@ nav {
 #main-display {
     background-color: cadetblue;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 5px;
 }
 /********** Project Label **********/
@@ -28,8 +28,24 @@ nav {
     background-color: aquamarine;
 }
 
-/******************************/
+#input-project {
+    display: none;
 
+}
+
+#input-project input {
+    width: 50px;
+}
+/******************************/
+.home-project-names {
+    display: none;
+    flex-direction: column;
+}
+
+#todo-notes {
+    display: flex;
+    flex-direction: column;
+}
 /********** Note Card **********/
 .note-card {
     display: flex;

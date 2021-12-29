@@ -45,8 +45,6 @@ function loadUI() {
     loadProjectDisplay()
 }
 
-// add location info in home screen
-// add user input screen for projects
 // add user imput screen for notes
 
 // add the date-nfs

@@ -4,6 +4,8 @@ import TodoList from './todo-list'
 
 
 const mainDisplay = document.getElementById('main-display')
+const notesDsiplay = document.querySelector('#todo-notes')
+const homeProjName = document.querySelector('.home-project-names')
 const addNoteBTN = document.getElementById('add-note')
 
 function addNewNoteButton() {
@@ -45,7 +47,7 @@ function createDisplayCard(title, description, date, status, priority, i, locati
     card.appendChild(dateP)
     card.appendChild(statusI)
     card.appendChild(dltBTN)
-    mainDisplay.appendChild(card)
+    notesDsiplay.appendChild(card)
 }
 
 //generates and display new notes
@@ -66,8 +68,9 @@ function noteGenerator(title, details, date, status, priority, location) {
 }
 
 function changeDisplay(id) {
-    mainDisplay.innerHTML = TodoList.projects[id].projectName
-    mainDisplay.appendChild(addNoteBTN)
+    homeProjName.style.display = 'none'
+    notesDsiplay.innerHTML = TodoList.projects[id].projectName
+    notesDsiplay.appendChild(addNoteBTN)
     addNoteBTN.onclick = () => noteGenerator(...userNoteInput(),id)
 
     //load previously generated notes
@@ -77,13 +80,25 @@ function changeDisplay(id) {
 }
 
 function displayAllNotes() {
-    mainDisplay.innerHTML = 'Home'
+    notesDsiplay.innerHTML = 'Home'
+    homeProjName.innerHTML = ''
+    homeProjName.style.display = 'flex'
     
     TodoList.projects.forEach((project, location) => {
         project.notes.forEach((note, i) => {
             createDisplayCard(...Object.values(note), i, location)
+            projectNameInHome(location)
         })
     })
+}
+
+function projectNameInHome(location) {
+    const nameCard = document.createElement('div')
+    nameCard.classList.add('name-card')
+
+    const text = TodoList.projects[location].projectName
+    nameCard.textContent = text
+    homeProjName.appendChild(nameCard)
 }
 
 function loadNoteDisplay() {

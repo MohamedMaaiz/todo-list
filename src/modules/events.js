@@ -57,13 +57,11 @@ function userNoteInput() { //take input from user
 }
 
 function changeNoteStatus(i, location, status) {
-    
     if (status) {
         TodoList.projects[location].notes[i].status = false
         currentScreen == 'home' ? displayAllNotes() : changeDisplay(location)
         return status = false
     }
-    
     TodoList.projects[location].notes[i].status = true
     currentScreen == 'home' ? displayAllNotes() : changeDisplay(location)
     return status = true 
@@ -94,12 +92,9 @@ function priorityColor(status, priorityD, priority) {
 }
 
 function loadEventListners() {
-    const addProjectBTN = document.getElementById('add-project')
+    // const addProjectBTN = document.getElementById('add-project')
 
-    addProjectBTN.onclick = () => {
-        new TodoList('p1class')
-        loadProjectDisplay()
-    }
+    
 
     const homeBTN = document.getElementById('home-btn')
     homeBTN.onclick = () => {
