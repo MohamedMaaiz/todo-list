@@ -6,6 +6,7 @@ import TodoList from './todo-list'
 const projectName = document.querySelector('.project-name')
 const notesDsiplay = document.querySelector('#todo-notes')
 const homeProjName = document.querySelector('.home-project-names')
+// const mainDisplay = document.getElementById('main-display')
 const addNoteBTN = document.getElementById('add-note')
 const noteAddScreen = document.getElementById('input-note')
 const noteSubmitBTN = document.getElementById('note-submit')
@@ -70,7 +71,7 @@ function changeDisplay(id) {
     projectName.textContent = TodoList.projects[id].projectName
     notesDsiplay.textContent = ''
     addNewNoteButton(id)
-
+    
     //load previously generated notes
     TodoList.projects[id].notes.forEach((obj, i) => {
         createDisplayCard(...Object.values(obj), i, id)
@@ -78,6 +79,7 @@ function changeDisplay(id) {
 }
 
 function addNewNoteButton(id) {
+    addNoteBTN.style.display = 'flex'
     addNoteBTN.onclick = () => {
         if (addNoteBTN.textContent == '+') {
             addNoteBTN.textContent = 'x'
@@ -130,9 +132,13 @@ function userNoteInput() { //take input from user
 }
 
 function displayAllNotes() {
-    notesDsiplay.innerHTML = 'Home'
+    notesDsiplay.innerHTML = ''
+    // projectName.innerHTML = 'Home'
     homeProjName.innerHTML = ''
+    // mainDisplay.style.flexDirection = 'row'
     homeProjName.style.display = 'flex'
+    addNoteBTN.style.display = 'none'
+    clearInputBox()
     
     TodoList.projects.forEach((project, location) => {
         project.notes.forEach((note, i) => {

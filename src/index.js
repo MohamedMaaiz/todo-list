@@ -43,4 +43,6 @@ function loadUI() {
     loadProjectDisplay()
 }
 
+// give the index from array index and make change using &&
+
 // add the date-nfs

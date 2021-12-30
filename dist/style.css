@@ -17,12 +17,6 @@ nav {
     background-color: bisque;
 }
 
-#main-display {
-    background-color: cadetblue;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
 /********** Project Label **********/
 .active-display {
     background-color: aquamarine;
@@ -36,13 +30,24 @@ nav {
     width: 50px;
 }
 /******************************/
+
+#main-display {
+    background-color: cadetblue;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
 .home-project-names {
     display: none;
     flex-direction: column;
 }
 
 .project-name {
-
+    background-color: darkorange;
+    width: 100%;
 }
 
 #todo-notes {
