@@ -44,5 +44,6 @@ function loadUI() {
 }
 
 // give the index from array index and make change using &&
+// sort using date format
 
-// add the date-nfs
+// add the date-fns

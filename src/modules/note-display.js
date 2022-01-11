@@ -72,8 +72,12 @@ function changeDisplay(id) {
     notesDsiplay.textContent = ''
     addNewNoteButton(id)
     
+    // let i
+
     //load previously generated notes
     TodoList.projects[id].notes.forEach((obj, i) => {
+        i = TodoList.projects[id].notes.indexOf(obj)
+        
         createDisplayCard(...Object.values(obj), i, id)
     });
 }
@@ -133,15 +137,14 @@ function userNoteInput() { //take input from user
 
 function displayAllNotes() {
     notesDsiplay.innerHTML = ''
-    // projectName.innerHTML = 'Home'
     homeProjName.innerHTML = ''
-    // mainDisplay.style.flexDirection = 'row'
     homeProjName.style.display = 'flex'
     addNoteBTN.style.display = 'none'
     clearInputBox()
     
     TodoList.projects.forEach((project, location) => {
         project.notes.forEach((note, i) => {
+            i = TodoList.projects[location].notes.indexOf(note)
             createDisplayCard(...Object.values(note), i, location)
             projectNameInHome(location)
         })

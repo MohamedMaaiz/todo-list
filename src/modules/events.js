@@ -93,3 +93,6 @@ function loadEventListners() {
 }
 
 export { loadEventListners, deleteProject, labelActive, priorityColor, displayCardEvents};
+
+
+//make a note sorting function
