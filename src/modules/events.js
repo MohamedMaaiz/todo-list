@@ -3,6 +3,7 @@ import {changeDisplay, displayAllNotes} from './note-display.js'
 import TodoList from './todo-list'
 import loadProjectDisplay from './project-display'
 
+let currentProject
 let currentScreen
 const labelActive = {
     remove: function() {
@@ -13,9 +14,10 @@ const labelActive = {
         currentScreen = 'project'
         label.classList.add('active-display') 
         changeDisplay(i)
+        currentProject = i
     },
     addBTN: function(btn) {
-        currentScreen = 'home'
+        currentScreen = currentProject = 'home'
         btn.classList.add('active-display') 
     }
 }
@@ -46,7 +48,35 @@ function deleteProject(i) {
     loadProjectDisplay()
 }
 
+function sortNote() {
+    let list = []
+    let locationList = []
 
+    if (currentProject == 'home') {
+        TodoList.projects.forEach((project, location) => {
+            project.notes.forEach((note, i) => {
+                i = TodoList.projects[location].notes.indexOf(note)
+                list.push({...Object(note), i, location})
+            })
+        })
+    } else {
+        list = [...TodoList.projects[currentProject].notes]
+    }
+
+    list.sort((a, b) => {
+        var dateA = new Date(a.date)
+        var dateB = new Date(b.date)
+        return dateA - dateB
+    }) 
+
+    list.forEach(note => {
+        locationList.push(note.location)
+    })
+
+    console.log(list)
+    console.log(locationList)
+
+}
 
 function changeNoteStatus(i, location, status) {
     if (status) {
@@ -90,9 +120,16 @@ function loadEventListners() {
         labelActive.addBTN(homeBTN)
         displayAllNotes()
     }
+
+    const sortBTN = document.getElementById('sort-btn')
+    sortBTN.onclick = () => {
+        sortNote()
+    }
 }
 
-export { loadEventListners, deleteProject, labelActive, priorityColor, displayCardEvents};
+export { loadEventListners, deleteProject, labelActive, priorityColor, displayCardEvents, currentProject};
 
 
-//make a note sorting function
+//make three switch for sorting 'default/accending/decc..' in separte function
+//test delete
+//test checked
