@@ -17,6 +17,29 @@ nav {
     background-color: bisque;
 }
 
+/********** sort btns **********/
+#sort-btns {
+    float: left;
+    background: #242729;
+}
+
+#sort-btns input {
+    position: absolute;
+    opacity: 0;
+}
+
+#sort-btns input + label {
+    /* padding: 7px; */
+    float:left;
+    color: #fff;
+    cursor: pointer;
+}
+
+#sort-btns input:checked + label {
+    background: green;
+}
+/******************************/
+
 /********** Project Label **********/
 .active-display {
     background-color: aquamarine;

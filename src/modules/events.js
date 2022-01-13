@@ -73,8 +73,9 @@ function sortNote() {
         locationList.push(note.location)
     })
 
-    console.log(list)
-    console.log(locationList)
+    // console.log(list)
+    // console.log(locationList)
+    console.log(document.querySelector('input[name="sort-btn"]:checked').id)
 
 }
 
