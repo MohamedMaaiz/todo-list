@@ -48,9 +48,9 @@ function deleteProject(i) {
     loadProjectDisplay()
 }
 
-function sortNote() {
+function sortNote(order, id) {
     let list = []
-    let locationList = []
+    if (id != undefined) currentProject = id
 
     if (currentProject == 'home') {
         TodoList.projects.forEach((project, location) => {
@@ -60,7 +60,9 @@ function sortNote() {
             })
         })
     } else {
-        list = [...TodoList.projects[currentProject].notes]
+        TodoList.projects[currentProject].notes.forEach((note, i) => {
+            list.push({...Object(note), i, currentProject})
+        })
     }
 
     list.sort((a, b) => {
@@ -69,15 +71,9 @@ function sortNote() {
         return dateA - dateB
     }) 
 
-    list.forEach(note => {
-        locationList.push(note.location)
-    })
-
-    // console.log(list)
-    // console.log(locationList)
-    console.log(document.querySelector('input[name="sort-btn"]:checked').id)
-
+    return order == 'sort-ascend' ? list : list.reverse()
 }
+
 
 function changeNoteStatus(i, location, status) {
     if (status) {
@@ -126,11 +122,11 @@ function loadEventListners() {
     sortBTN.onclick = () => {
         sortNote()
     }
+
+    const sortBTNs = document.getElementById('sort-btns')
+    sortBTNs.oninput = () => {
+        currentScreen == 'home' ? displayAllNotes() : changeDisplay(currentProject)
+    }
 }
 
-export { loadEventListners, deleteProject, labelActive, priorityColor, displayCardEvents, currentProject};
-
-
-//make three switch for sorting 'default/accending/decc..' in separte function
-//test delete
-//test checked
+export { loadEventListners, deleteProject, labelActive, priorityColor, displayCardEvents, currentProject, sortNote};

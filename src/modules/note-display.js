@@ -1,4 +1,4 @@
-import { priorityColor, displayCardEvents} from './events'
+import { priorityColor, displayCardEvents, sortNote} from './events'
 import Note from './Notes'
 import TodoList from './todo-list'
 
@@ -6,7 +6,6 @@ import TodoList from './todo-list'
 const projectName = document.querySelector('.project-name')
 const notesDsiplay = document.querySelector('#todo-notes')
 const homeProjName = document.querySelector('.home-project-names')
-// const mainDisplay = document.getElementById('main-display')
 const addNoteBTN = document.getElementById('add-note')
 const noteAddScreen = document.getElementById('input-note')
 const noteSubmitBTN = document.getElementById('note-submit')
@@ -71,15 +70,19 @@ function changeDisplay(id) {
     projectName.textContent = TodoList.projects[id].projectName
     notesDsiplay.textContent = ''
     addNewNoteButton(id)
-    
-    // let i
 
-    //load previously generated notes
-    TodoList.projects[id].notes.forEach((obj, i) => {
-        i = TodoList.projects[id].notes.indexOf(obj)
-        
-        createDisplayCard(...Object.values(obj), i, id)
-    });
+    const sort = document.querySelector('input[name="sort-btn"]:checked').id
+
+    if (sort == 'sort-default') {
+        TodoList.projects[id].notes.forEach((obj, i) => {
+            i = TodoList.projects[id].notes.indexOf(obj)
+            createDisplayCard(...Object.values(obj), i, id)
+        }) 
+    } else {
+        sortNote(sort, id).forEach(obj => {
+            createDisplayCard(...Object.values(obj))
+        })
+    }
 }
 
 function addNewNoteButton(id) {
@@ -124,14 +127,6 @@ function userNoteInput() { //take input from user
     let noteDate = document.getElementById('note-date').value
     let notePriority = document.getElementById('note-priority').value
 
-    // console.log(noteTitle, noteDetails, noteDate, notePriority)
-    // let title = 'name'
-    // let details = 'generated'
-    // let date = '0/0/0'
-    // let status = false
-    // let priority = 2
-
-    // return [title, details, date, status, priority]
     return [noteTitle, noteDetails, noteDate, false, notePriority]
 }
 
@@ -141,14 +136,23 @@ function displayAllNotes() {
     homeProjName.style.display = 'flex'
     addNoteBTN.style.display = 'none'
     clearInputBox()
-    
-    TodoList.projects.forEach((project, location) => {
-        project.notes.forEach((note, i) => {
-            i = TodoList.projects[location].notes.indexOf(note)
-            createDisplayCard(...Object.values(note), i, location)
-            projectNameInHome(location)
+
+    let sort = document.querySelector('input[name="sort-btn"]:checked').id
+
+    if (sort == 'sort-default') {
+        TodoList.projects.forEach((project, location) => {
+            project.notes.forEach((note, i) => {
+                i = TodoList.projects[location].notes.indexOf(note)
+                createDisplayCard(...Object.values(note), i, location)
+                projectNameInHome(location)
+            })
         })
-    })
+    } else {
+        sortNote(sort).forEach(obj => {
+            createDisplayCard(...Object.values(obj))
+            projectNameInHome(obj.location)
+        })
+    }
 }
 
 function projectNameInHome(location) {
